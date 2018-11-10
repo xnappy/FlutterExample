@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(OverviewPage());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class OverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,13 +68,18 @@ class RandomWordsState extends State<RandomWords> {
         color: alreadySaved ? Colors.red : null,
       ),
       onTap: () {
-        setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailsPage()),
+        );
+
+        /*setState(() {
           if (alreadySaved) {
             _saved.remove(pair);
           } else {
             _saved.add(pair);
           }
-        });
+        });*/
       },
     );
   }
@@ -111,6 +115,41 @@ class RandomWordsState extends State<RandomWords> {
   }
 }
 
-class RandomWordDescriptionState extends State<RandomWords> {
+///////////////// SECOND PAGE //////////////////
 
+class DetailsPage extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Codalin',
+      theme: ThemeData.dark(),
+      home: Details(),
+    );
+  }
+}
+
+class Details extends StatefulWidget {
+  @override
+  RandomWordDescriptionState createState() => new RandomWordDescriptionState();
+}
+
+class RandomWordDescriptionState extends State<Details> {
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Codalin Name Generator'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
 }
